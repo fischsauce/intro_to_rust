@@ -1,12 +1,11 @@
-fn main() {             // s is not valid here, it’s not yet declared
-    let s = "hello";    // s is valid from this point forward
+fn main() {                     // s is not valid here, it’s not yet declared
+    let s = "hello";      // s is valid from this point forward
     
-                        // do stuff with s
+                                // do stuff with s
                         
     strings();
     mover();
-}                       // this scope is now over, and s is no 
-                        // longer valid
+}                               // this scope is now over, and s is no longer valid
 
 
 fn strings() {
@@ -98,19 +97,19 @@ fn foo() {
     // Passing a variable to a function will move or copy, 
     // just as assignment does.
 
-    let s = String::from("hello");  // s comes into scope
+    let s = String::from("hello");      // s comes into scope
 
-    takes_ownership(s);             // s's value moves into 
-                                    // the function...
+    takes_ownership(s);            // s's value moves into 
+                                                // the function...
 
-                                    // ... and so is no longer
-                                    //  valid here
+                                                // ... and so is no longer
+                                                //  valid here
 
-    let x = 5;                      // x comes into scope
+    let x = 5;                             // x comes into scope
 
-    makes_copy(x);                  // x would move into the function,
-                                    // but i32 is Copy, so it’s okay 
-                                    // to still use x afterward
+    makes_copy(x);                // x would move into the function,
+                                                // but i32 is Copy, so it’s okay 
+                                                // to still use x afterward
 
 }   // Here, x goes out of scope, then s. But because s's value 
     // was moved, nothing special happens.
@@ -136,15 +135,15 @@ fn bar() {
     // Returning values can also transfer ownership.
 
     let s1 = gives_ownership();         // gives_ownership moves 
-                                        // its return value into s1
+                                                // its return value into s1
 
     let s2 = String::from("hello");     // s2 comes into scope
 
 
-    let s3 = takes_and_gives_back(s2);  // s2 is moved into 
-                                        // takes_and_gives_back, 
-                                        // which also moves its 
-                                        // return value into s3
+    let s3 = takes_and_gives_back(s2);    // s2 is moved into 
+                                                            // takes_and_gives_back, 
+                                                            // which also moves its 
+                                                            // return value into s3
 
 }   // Here, s3 goes out of scope and is dropped.
     // s2 goes out of scope but was moved, so nothing happens. 
@@ -155,18 +154,16 @@ fn gives_ownership() -> String {    // gives_ownership will move
                                     // its return value into the 
                                     // function that calls it
 
-    let some_string = String::from("hello"); // some_string comes 
-                                             // into scope
+    let some_string = String::from("hello");    // some_string comes into scope
 
     some_string                     // some_string is returned and 
                                     // moves out to the calling function
 }
 
 // takes_and_gives_back will take a String and return one:
-fn takes_and_gives_back(a_string: String) -> String { // a_string comes 
-                                                      // into scope
+fn takes_and_gives_back(a_string: String) -> String { // a_string comes into scope
 
-a_string  // a_string is returned and moves out to the calling function
+    a_string  // a_string is returned and moves out to the calling function
 
 }
 
@@ -180,6 +177,7 @@ a_string  // a_string is returned and moves out to the calling function
 
 // It’s possible to return multiple values using a tuple:
 fn returner() {
+
     let s1 = String::from("hello");
 
     let (s2, len) = calculate_length(s1);
@@ -192,3 +190,5 @@ fn calculate_length(s: String) -> (String, usize) {
 
     (s, length)
 }
+
+// The above example represents "too much work", so avoid this and use references/borrowing instead.alloc

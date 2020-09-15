@@ -3,7 +3,7 @@
 // Slices let you reference a contiguous sequence of elements in a 
 // collection rather than the whole collection.
 fn main() {
-    let mut sentence = String::from("I've have a lot of apples");
+    let mut sentence = String::from("I've a lot of apples");
     
     let word = first_word(&sentence);   // word will get the value 4
                  
@@ -16,6 +16,16 @@ fn main() {
                             // is now totally invalid!
 
     println!("{}", word);  
+
+
+
+
+
+    let mut sentence2 = String::from("I've a lot of apples");
+
+    let second_slice_method: &str = first_word2(&sentence2);
+
+    println!("{}", second_slice_method);
 }
 
 // We now have a way to find out the index of the end of the first word 
@@ -104,3 +114,5 @@ fn first_word2(s: &String) -> &str {
 
     // let slice = &a[1..3];
 
+// This slice has the type &[i32]. It works the same way as string slices do, 
+// by storing a reference to the first element and a length.
