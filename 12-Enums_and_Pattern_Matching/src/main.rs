@@ -1,4 +1,7 @@
 
+// Rust’s enums are most similar to algebraic data types in functional languages, 
+// such as F#, OCaml, and Haskell.
+
 // Defining an Enum:
 
 // * enum values can only be one of its variants.
@@ -49,10 +52,12 @@ fn main() {
         address: String::from("::1"),
     };
 
-    // We’ve used a struct to bundle the kind and address values together, so now the variant is associated with the value.
+    // We’ve used a struct to bundle the kind and address values together, 
+    // so now the variant is associated with the value.
 
 
-    // We can represent the same concept in a more concise way using just an enum, rather than an enum inside a struct, by putting data directly into each enum variant:
+    // We can represent the same concept in a more concise way using just an enum, 
+    // rather than an enum inside a struct, by putting data directly into each enum variant:
 
     enum IpAddr2 {
         V4(String),
@@ -80,7 +85,9 @@ fn main() {
 
     // Let’s look at how the standard library defines IpAddr: 
     
-    // it has the exact enum and variants that we’ve defined and used, but it embeds the address data inside the variants in the form of two different structs, which are defined differently for each variant:
+    // it has the exact enum and variants that we’ve defined and used, but it embeds
+    // the address data inside the variants in the form of two different structs, 
+    // which are defined differently for each variant:
 
     struct Ipv4Addr {
         // --snip--
@@ -100,6 +107,8 @@ fn main() {
     
     // this one has a wide variety of types embedded in its variants:
 
+    #[derive(Debug)]
+
     enum Message {
         Quit,
         Move { x: i32, y: i32 },
@@ -107,11 +116,28 @@ fn main() {
         ChangeColor(i32, i32, i32),
     }
 
+
+    // The following structs could hold the same data that the preceding enum variants hold:
+
+    // struct QuitMessage; // unit struct
+    // struct MoveMessage {
+    //     x: i32,
+    //     y: i32,
+    // }
+    // struct WriteMessage(String); // tuple struct
+    // struct ChangeColorMessage(i32, i32, i32); // tuple struct
+
+
+    // There is one more similarity between enums and structs: just as we’re able to
+    // define methods on structs using impl, we’re also able to define methods on enums.
     // Here’s a method named call that we could define on our Message enum:
+
+    
 
     impl Message {
         fn call(&self) {
-            println!{"Beep!"}
+            println!("{:?}", &self)
+            
         }
     }
 
@@ -119,3 +145,33 @@ fn main() {
 
     m.call();
 }
+
+
+
+// Rust does not have nulls, but it does have an enum that can encode the concept 
+// of a value being present or absent. This enum is Option<T>, and it is defined 
+// by the standard library as follows:
+
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+// you can use Some and None directly without the Option:: prefix. The Option<T> enum
+// is still just a regular enum, and Some(T) and None are still variants of type Option<T>.
+
+
+
+// The <T> syntax is a feature of Rust. <T> means the Some variant of the Option enum
+//  can hold one piece of data of any type. 
+
+// Here are some examples of using Option values to hold number types and string types:
+
+
+// let some_number = Some(5);   
+
+// let some_string = Some("a string");
+
+// let absent_number: Option<i32> = None; // If we use None rather than Some, we need to
+                                          // tell Rust what type of Option<T> we have, 
+                                          // because the compiler can’t infer the type.

@@ -3,7 +3,8 @@
 
 fn main() {
     
-    // Consider the following program that matches on an Option<u8> value but only wants to execute code if the value is 3:
+    // Consider the following program that matches on an Option<u8> value 
+    // but only wants to execute code if the value is 3:
 
     let some_u8_value = Some(0u8);
 
@@ -13,18 +14,23 @@ fn main() {
     }
 
 
-    // Instead, we could write this in a shorter way using if let. The following code behaves the same:
+    // Instead, we could write this in a shorter way using if let.
+    // The following code behaves the same:
 
     if let Some(3) = some_u8_value {
         println!("three");
     }
 
-    // you can think of if let as syntax sugar for a match that runs code when the value matches one pattern and then ignores all other values.
+    // you can think of if let as syntax sugar for a match that runs code
+    // when the value matches one pattern and then ignores all other values.
 
 
-    // We can include an else with an if let. The block of code that goes with the else is the same as the block of code that would go with the _ case in the match expression that is equivalent to the if let and else:
+    // We can include an else with an if let. The block of code that goes with 
+    // the else is the same as the block of code that would go with the _ case in 
+    // the match expression that is equivalent to the if let and else:
 
     let mut count = 0;
+    
     match coin {
         Coin::Quarter(state) => println!("State quarter from {:?}!", state),
         _ => count += 1,

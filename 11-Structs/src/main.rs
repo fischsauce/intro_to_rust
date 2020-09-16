@@ -1,3 +1,73 @@
+
+// A basic struct:
+
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+
+// Returning a struct from a function:
+
+fn build_user(email: String, username: String) -> User {
+
+    // Because the parameter names and the struct field names are exactly 
+    // the same in, we can use the field init shorthand syntax
+
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
+
+    // Or, to conSTRUCT in a static fashion:
+
+    // let user1 = User {
+    //     email: String::from("someone@example.com"),
+    //     username: String::from("someusername123"),
+    //     active: true,
+    //     sign_in_count: 1,
+    // };
+
+
+    // Using struct update syntax, we can achieve the same effect with less code:
+
+    // let user2 = User {
+    //     email: String::from("another@example.com"),
+    //     username: String::from("anotherusername567"),
+    //     ..user1        // remaining values are set from the previous instance of User
+    // };
+
+}
+
+
+// You can also define structs that look similar to tuples, called tuple structs. 
+// Tuple structs have the added meaning the struct name provides but don’t have names
+// associated with their fields; rather, they just have the types of the fields.
+
+
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+// let black = Color(0, 0, 0);
+// let origin = Point(0, 0, 0);
+
+
+// Each struct you define is its own type, even though the fields 
+// within the struct have the same types.
+
+
+
+// It’s possible for structs to store references to data owned by something else, 
+// but to do so requires the use of lifetimes. Lifetimes ensure that the data 
+// referenced by a struct is valid for as long as the struct is. See chapter 10.
+
+
+
+
+
 fn main() {
     let width1 = 30;
     let height1 = 50;
@@ -34,9 +104,12 @@ fn area2(dimensions: (u32, u32)) -> u32 {
 }
 
 
-// Refactoring with Structs: Adding More Meaning:
+// Refactoring with Structs::
 
-#[derive(Debug)]
+
+
+#[derive(Debug)]    // structs don’t have a provided implementation of Display, 
+                    // becauase ambiguity of types. ergo this is necessary.
 
 struct Rectangle {
     width: u32,
@@ -80,6 +153,7 @@ fn printRect(rectangle: &Rectangle) {
 // method defined on the Rectangle struct
 
 #[derive(Debug)]
+
 struct Rectanglo {
     width: u32,
     height: u32,
@@ -146,5 +220,14 @@ fn main5() {
     println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
 }
 
+// A note about method operators; 
 
+// Rust has a feature called automatic referencing and dereferencing. when you call a method 
+// with object.something(), Rust automatically adds in &, &mut, or * so object matches the 
+// signature of the method. 
+
+// In other words, the following are the same:
+
+// p1.distance(&p2);
+// (&p1).distance(&p2);
 

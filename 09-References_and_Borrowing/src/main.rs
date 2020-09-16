@@ -29,10 +29,10 @@ fn calculate_length(s: String) -> (String, usize) {
 fn main() {
     let s1 = String::from("hello");
 
-    let len = calculate_length2(&s1);   // These ampersands are 
-                                        // references, and they allow 
-                                        // you to refer to some value 
-                                        // without taking ownership of it.
+    let len = calculate_length2(&s1);    // These ampersands are 
+                                                // references, and they allow 
+                                                // you to refer to some value 
+                                                // without taking ownership of it.
 
 
     println!("The length of '{}' is {}.", s1, len);
@@ -51,6 +51,7 @@ fn calculate_length2(s: &String) -> usize { // s is a reference to
 
 
 // So what happens if we try to modify something we’re borrowing?
+
 // fn borrow() {
 //     let s = String::from("hello");
 //     change(&s);
@@ -65,7 +66,7 @@ fn calculate_length2(s: &String) -> usize { // s is a reference to
 // We’re not allowed to modify something we have a reference to.
 
 
-// ** The opposite of referencing by using & is dereferencing, which is 
+// ** The opposite of referencing by using & , is 'dereferencing', which is 
 // ** accomplished with the dereference operator, *
 
 
